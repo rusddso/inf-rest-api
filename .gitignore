@@ -1,0 +1,10 @@
+.ivy2
+.sbt
+project
+target
+*.class
+.idea
+*.log
+.env
+.DS_Store
+

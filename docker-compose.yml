@@ -1,0 +1,25 @@
+version: '2'
+services:
+  api:
+    build: ./
+    container_name: api
+    stdin_open: true
+    command: bash -c "cd /api && sbt run"
+    volumes:
+      - ./:/api
+      - ./.ivy2:/root/.ivy2
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: infinera_db
+      POSTGRES_USER: infinera
+      POSTGRES_PASSWORD: pass123
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
